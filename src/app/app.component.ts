@@ -29,7 +29,7 @@ export class AppComponent {
   onGenerateClick(){
     if (isUrl(this.inputURL) || isUrl("http://"+this.inputURL) || isUrl("https://"+this.inputURL)){
       const params = new HttpParams().set('fullURL',this.inputURL);
-      this.http.post<any>('https://tinyurl3.herokuapp.com/url', null, {params: params, headers:this.headers}).subscribe((response) => {
+      this.http.post<any>('https://tinyurl3.herokuapp.com/new', null, {params: params, headers:this.headers}).subscribe((response) => {
         this.tinyURL = response.tinyURL;
       });
     } else {
