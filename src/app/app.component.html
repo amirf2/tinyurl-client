@@ -1,0 +1,45 @@
+<div class="mt-5 container text-center">
+
+  <div class="m-5"> 
+    <h1>Tiny URL</h1>
+  </div>
+
+  <div class="container">
+    <div class="d-inline-flex">
+      <div class="mr-auto p-2 ">
+        <label class="mr-2">Original URL: </label>
+        <input  style="min-width:300px;" (input)="onChangeGenerate($event.target.value)" [value]="inputURL" />
+      </div>
+      <div class="p-1">      
+        <button (click)="onGenerateClick()" class="btn-sm btn-primary">Generate</button>
+      </div>
+      <div class="p-1">      
+        <button (click)="onBrowse(inputURL)" class="btn-sm btn-primary">Browse</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container mt-2">
+    <div class="container">
+      <div class="d-inline-flex">
+        <div class="mr-auto p-2">
+          <label class="mr-2">Tiny URL: </label>
+          <input style="min-width:300px;" readonly="readonly" [value]="tinyURL" />
+        </div>
+        <div class="p-1 ">      
+          <button  [cdkCopyToClipboard]="onCopy()"  class="btn-sm btn-primary">Copy</button>
+        </div>
+        <div class="p-1 ">      
+          <button (click)="onBrowse(tinyURL)" class="btn-sm btn-primary">Browse</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+ 
+
+  
+
