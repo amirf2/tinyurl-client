@@ -14,6 +14,7 @@ To see the client in action, go to [TinyUrl](https://tinyurl4.herokuapp.com/)
     npm install
     ng serve
     ``` 
+   * Edit the server env variable at src/environments/environment.ts if necessary
   * Client should run under http://localhost:4200
   
   ##### ServerSide: please review [TinyUrlServer](https://github.com/amirf2/tinyurl-server)
