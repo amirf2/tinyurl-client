@@ -14,10 +14,10 @@ To see the client in action, go to [TinyUrl](https://tinyurl4.herokuapp.com/)
     npm install
     ng serve
     ``` 
-  * Server should run under http://localhost:4200
+  * Client should run under http://localhost:4200
   
-  ##### ServerSide
-> please review [TinyUrlServer](https://github.com/amirf2/tinyurl-server)
+  ##### ServerSide: please review [TinyUrlServer](https://github.com/amirf2/tinyurl-server)
+  
 
 
 
