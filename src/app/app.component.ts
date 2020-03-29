@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient , HttpHeaders, HttpParams} from '@angular/common/http'
+import { environment } from '../environments/environment';
 import isUrl from 'is-url'
 
 @Component({
@@ -26,19 +27,33 @@ export class AppComponent {
     });
   }
 
-  onGenerateClick(){
+  onGenerateClickFullToTiny(){
+    const fullURL = {fullURL: this.inputURL}
     if (isUrl(this.inputURL) || isUrl("http://"+this.inputURL) || isUrl("https://"+this.inputURL)){
-      const params = new HttpParams().set('fullURL',this.inputURL);
-      this.http.post<any>('https://tinyurl3.herokuapp.com/new', null, {params: params, headers:this.headers}).subscribe((response) => {
+      this.http.post<any>(`${environment.server}/url/new`, fullURL, {headers:this.headers}).subscribe((response) => {
         this.tinyURL = response.tinyURL;
       });
+    } else { 
+        alert("Please enter valid URL");
+    }
+  }
+
+  onGenerateClickTinyToFull(){
+    console.log(this.tinyURL);
+    if (this.tinyURL.startsWith(environment.server)){
+      const pathArray = this.tinyURL.split(environment.server+"/");
+      const shortid = pathArray[pathArray.length-1];
+      this.http.get<any>(`${environment.server}/url/${shortid}`, {headers:this.headers}).subscribe((response) => {
+        this.inputURL = response.fullURL;
+      });
     } else {
-      alert("Please enter valid URL");
+        alert(`TinyURL path should start with: ${environment.server}/{Tiny Url PATH}
+              for example: ${environment.server}/Ab45lZ`);
     }
   }
 
 
-  onBrowse(url){
+  onBrowse(url: string){
     if (isUrl(url)){
       window.open(`${url}`, '_blank')
     } else if (isUrl("http://"+url) || isUrl("https://"+url)) {
@@ -48,12 +63,19 @@ export class AppComponent {
     }
   }
 
-  onCopy(){
-    return this.tinyURL;
+  onCopy(id: string){
+
+    if (id==="full")
+      return this.inputURL;
+    if (id==="tiny")
+      return this.tinyURL;
   } 
 
-  onChangeGenerate(inputURL: string){
-    this.inputURL=inputURL;
+  onChangeGenerate(URL: string, id: string){
+    if (id==="full")
+      this.inputURL=URL;
+    if (id==="tiny")
+      this.tinyURL=URL;
   }
 
 

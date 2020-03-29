@@ -8,10 +8,13 @@
     <div class="d-inline-flex">
       <div class="mr-auto p-2 ">
         <label class="mr-2">Original URL: </label>
-        <input  style="min-width:300px;" (input)="onChangeGenerate($event.target.value)" [value]="inputURL" />
+        <input id="full" style="min-width:300px;" (input)="onChangeGenerate($event.target.value,  $event.target.id)" [value]="inputURL" />
       </div>
       <div class="p-1">      
-        <button (click)="onGenerateClick()" class="btn-sm btn-primary">Generate</button>
+        <button (click)="onGenerateClickFullToTiny()" class="btn-sm btn-primary">Generate Tiny URL</button>
+      </div>
+      <div class="p-1 ">      
+        <button id="copyFull" [cdkCopyToClipboard]="onCopy('full')" class="btn-sm btn-primary">Copy</button>
       </div>
       <div class="p-1">      
         <button (click)="onBrowse(inputURL)" class="btn-sm btn-primary">Browse</button>
@@ -25,10 +28,13 @@
       <div class="d-inline-flex">
         <div class="mr-auto p-2">
           <label class="mr-2">Tiny URL: </label>
-          <input style="min-width:300px;" readonly="readonly" [value]="tinyURL" />
+          <input id="tiny" style="min-width:300px;" (input)="onChangeGenerate($event.target.value, $event.target.id)" [value]="tinyURL" />
         </div>
         <div class="p-1 ">      
-          <button  [cdkCopyToClipboard]="onCopy()"  class="btn-sm btn-primary">Copy</button>
+          <button (click)="onGenerateClickTinyToFull()" class="btn-sm btn-primary">Generate Full URL</button>
+        </div>
+        <div class="p-1 ">      
+          <button id="copyTiny" [cdkCopyToClipboard]="onCopy('tiny')" class="btn-sm btn-primary">Copy</button>
         </div>
         <div class="p-1 ">      
           <button (click)="onBrowse(tinyURL)" class="btn-sm btn-primary">Browse</button>
